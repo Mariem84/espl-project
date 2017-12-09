@@ -166,7 +166,7 @@ void drawTask() {
 		sprintf( str, "position  %d",joystickPosition.y);
 		gdispDrawString(displaySizeX/2, displaySizeY/2, str, font1, Black);
 
-/*		switch(CurrentState)
+	/*	switch(CurrentState)
 				{
 				case StartMenu:
 				DrawStartMenu();
@@ -195,10 +195,10 @@ void drawTask() {
 				}
 				*/
 		DrawWay(joystickPosition.y);
-		DrawWayLeft(joystickPosition.x,joystickPosition.y,20,10);
+		DrawWayRight(joystickPosition.x,joystickPosition.y,20,10);
+
 		DrawCar(CarOption);
 		DrawInfo(CourseNum);
-
 
 		// Wait for display to stop writing
 		xSemaphoreTake(ESPL_DisplayReady, portMAX_DELAY);

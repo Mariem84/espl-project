@@ -13,16 +13,20 @@
 
 int carSize=10;
 static const uint16_t displaySizeX = 320, displaySizeY = 240;
-int counter =0;
+
 
 double posCar=0;
 double y=0;
+int i=0;
 
 void DrawStartMenu(){};
 void DrawCourseMenu();
 void DrawCourse1(){};
 void DrawCourse2(){};
 void DrawCourse3(){};
+
+
+
 
 void DrawInfo(CourseNum){
 	char str[100];
@@ -68,9 +72,6 @@ void DrawInfo(CourseNum){
 	gdispFillArea(0,0,displaySizeX,displaySizeY/6, White);
 	gdispFillArea(0,3*displaySizeY/4,displaySizeX,displaySizeY, White);
 
-	sprintf(str, "Time elapsed: %2i:%2i", counter/60, counter%60);
-	gdispDrawString(displaySizeX/2,3*displaySizeY/4+10,str,font1,Black);
-
 	//Draw Course
 	gdispDrawThickLine(22,3*displaySizeY/4+9,100,3*displaySizeY/4+9,Black,3,1);
 	gdispDrawThickArc(22,3*displaySizeY/4+30,20,22,90,270,Black);
@@ -93,7 +94,6 @@ void DrawInfo(CourseNum){
 
 }
 
-
 void DrawWay(uint8_t joystickPositionY) {
 
 	int i=0;
@@ -108,24 +108,25 @@ void DrawWay(uint8_t joystickPositionY) {
 	    y=y+1-0,5*v;
 	    }
 
-   int j=-40;
+   int j=-20;
    double posXmin=-255-3*carSize;
-   int k=0;
+
    posCar=posCar+y;
    if (y>3*displaySizeY/4)
 	   y=0;
-	while (i<40) { //
-		 if (y>3*displaySizeY/4)
-
-		gdispFillArea(0,y+i*(displaySizeY/40),displaySizeX,displaySizeY/40, Black);
-		gdispFillArea(0,y+(i+1)*(displaySizeY/40),displaySizeX,displaySizeY/40, White);
-
-		 if (y>3*displaySizeY/4)
-		gdispFillArea(0,y+j*(displaySizeY/40),displaySizeX,displaySizeY/40, Black);
-		gdispFillArea(0,y+(j+1)*(displaySizeY/40),displaySizeX,displaySizeY/40, White);
+   double k=0;
+	while (i<20) { //
 
 
+		gdispFillArea(0,y+i*(displaySizeY/20),displaySizeX,displaySizeY/20, Black);
+		gdispFillArea(0,y+(i+1)*(displaySizeY/20),displaySizeX,displaySizeY/20, White);
 
+
+		gdispFillArea(0,y+j*(displaySizeY/20),displaySizeX,displaySizeY/20, Black);
+		gdispFillArea(0,y+(j+1)*(displaySizeY/20),displaySizeX,displaySizeY/20, White);
+
+
+        k=k+1;
 		i=i+2;
 		j=j+2;
 
@@ -152,7 +153,7 @@ void DrawWayStraight(uint8_t joystickPositionX,uint8_t joystickPositionY){
 	    	BorderRight[i]=(displaySizeX)/2+carSize;
 
 
-		gdispFillArea(BorderLeft[i],i*(displaySizeY/40),BorderRight[i]-BorderLeft[i],displaySizeY/40, Black);
+		gdispFillArea(BorderLeft[i],i*(displaySizeY/40),BorderRight[i]-BorderLeft[i],displaySizeY/40, Green);
 
 		i=i+1;
 
@@ -190,7 +191,7 @@ void DrawWayRight(uint8_t joystickPositionX,uint8_t joystickPositionY, double tr
 	    	BorderRight[i]= BorderRight[i]-(BorderRight[30]-displaySizeX/2-carSize);
 	    }
 
-		gdispFillArea(BorderLeft[i],i*(displaySizeY/40),BorderRight[i]-BorderLeft[i],displaySizeY/40, Black);
+		gdispFillArea(BorderLeft[i],i*(displaySizeY/40),BorderRight[i]-BorderLeft[i],displaySizeY/40, Green);
 
 		i=i+1;
 
@@ -243,13 +244,5 @@ void DrawCar(CarOption) {
 	}
 }
 
-void count() {
-
-	while (TRUE) {
-		counter++;
-
-		vTaskDelay(pdMS_TO_TICKS(1000));
-	}
-}
 
 #endif /* CODE_DRAW_H_ */
